@@ -1,10 +1,32 @@
 # rtl8192eu linux drivers
 
-### Install Ubuntu (Tested on Ubuntu 14.04)
-* Clone
-* make
-* sudo make install
-* Reboot
+### Linux install --kernel 4.4.0-72-generic
+
+## Installing dkms
+	
+	sudo apt-get install git linux-headers-generic build-essential dkms
+
+
+##move the folder into /usr/src
+	
+	sudo mv /home/randbee/rtl8192eu-linux-driver /usr/src/rtl8192eu-1.0
+
+	dkms add rtl8192eu/1.0
+
+	sudo dkms install rtl8192eu/1.0
+
+## Compiling driver
+
+	cd /usr/src/
+	cd rtl8192eu-1.0/
+	sudo su -c "make clean"
+	module=`ls | grep -i 'ko'`
+	sudo su -c "rmmod $module"
+	sudo su -c "insmod $module"
+	sudo su -c "make install"
+	sudo su -c "make install"
+	reboot
+
 
 The official drivers for D-Link DWA-131 Rev E, with patches to keep it working on newer kernels.
 Also works on Rosewill RNX-N180UBE v2 N300 Wireless Adapter.
